@@ -4,14 +4,16 @@ const empty = document.querySelector('#empty');
 const usernameElement = document.querySelector('#username');
 
 async function getUser() {
-    // TODO
+    // Make xhr request
+    const response = await fetch('/.auth/me');
+    usernameElement.innerText = await response.json().then(user => user.clientPrincipal.userDetails)
 }
 
 async function updateTask() {
     // TODO
 }
 
-taskformElement.addEventListener('submit', async (e) => {
+taskformElement.addEventListener('submit', async(e) => {
 
     e.preventDefault();
     const newTaskInput = taskformElement.elements.new_task_input;
@@ -58,7 +60,7 @@ function generateTask(task) {
     const fragment = range.createContextualFragment(tmpl);
 
     fragment.querySelector('input').addEventListener('change', updateTask);
-    
+
     return fragment;
 }
 
