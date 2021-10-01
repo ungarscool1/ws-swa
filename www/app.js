@@ -4,7 +4,6 @@ const empty = document.querySelector('#empty');
 const usernameElement = document.querySelector('#username');
 
 async function getUser() {
-    // Make xhr request
     const response = await fetch('/.auth/me');
     usernameElement.innerText = await response.json().then(user => user.clientPrincipal.userDetails)
 }
